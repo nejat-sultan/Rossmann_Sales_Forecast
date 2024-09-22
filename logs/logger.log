@@ -1,0 +1,13 @@
+2024-09-22 18:07:36,016 - INFO - Data loaded successfully.
+2024-09-22 18:07:36,031 - ERROR - Error cleaning data: 'CompetitionDistance'
+2024-09-22 18:07:36,031 - ERROR - Error in pipeline execution: 'CompetitionDistance'
+2024-09-22 18:09:39,159 - INFO - Data loaded successfully.
+2024-09-22 18:09:39,159 - INFO - Train columns: ['Store', 'DayOfWeek', 'Date', 'Sales', 'Customers', 'Open', 'Promo', 'StateHoliday', 'SchoolHoliday']
+2024-09-22 18:09:39,159 - INFO - Test columns: ['Id', 'Store', 'DayOfWeek', 'Date', 'Open', 'Promo', 'StateHoliday', 'SchoolHoliday']
+2024-09-22 18:09:39,159 - INFO - Store columns: ['Store', 'StoreType', 'Assortment', 'CompetitionDistance', 'CompetitionOpenSinceMonth', 'CompetitionOpenSinceYear', 'Promo2', 'Promo2SinceWeek', 'Promo2SinceYear', 'PromoInterval']
+2024-09-22 18:09:39,166 - WARNING - 'CompetitionDistance' column is missing; skipping filling.
+2024-09-22 18:09:39,537 - INFO - Data cleaned successfully.
+2024-09-22 18:09:39,537 - WARNING - 'CompetitionDistance' column is missing; skipping filling.
+2024-09-22 18:09:39,553 - INFO - Data cleaned successfully.
+2024-09-22 18:09:39,868 - INFO - Data merged successfully.
+2024-09-22 18:09:39,899 - INFO - Pipeline executed successfully.

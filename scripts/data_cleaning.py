@@ -1,5 +1,9 @@
 import pandas as pd  # type: ignore
 from logs.logger import get_logger  # type: ignore
+from scripts import feature_engineering
+# Import train_model from modeltraining.py
+from scripts.model_training import train_model
+from scripts.feature_engineering import feature_engineering
 
 logger = get_logger('C:/Users/nejat/AIM Projects/Rossmann_Sales_Forecast/logs/logger.log')
 
@@ -9,8 +13,7 @@ def load_data(train_path, test_path, store_path):
         test = pd.read_csv(test_path)
         store = pd.read_csv(store_path)
         logger.info("Data loaded successfully.")
-        
-        # Log the columns of the DataFrames
+
         logger.info(f"Train columns: {train.columns.tolist()}")
         logger.info(f"Test columns: {test.columns.tolist()}")
         logger.info(f"Store columns: {store.columns.tolist()}")
@@ -23,7 +26,6 @@ def load_data(train_path, test_path, store_path):
 
 def clean_data(df):
     try:
-        # Handle missing values
         if 'CompetitionDistance' in df.columns:
             df['CompetitionDistance'].fillna(df['CompetitionDistance'].median(), inplace=True)
         else:
@@ -47,7 +49,6 @@ def clean_data(df):
         if 'Date' in df.columns:
             df['Date'] = pd.to_datetime(df['Date'])
 
-            # Additional Date Features
             df['Year'] = df['Date'].dt.year
             df['Month'] = df['Date'].dt.month
             df['Day'] = df['Date'].dt.day
@@ -78,16 +79,26 @@ def main():
         train_path = 'C:/Users/nejat/AIM Projects/week4 data/train.csv'
         test_path = 'C:/Users/nejat/AIM Projects/week4 data/test.csv'
         store_path = 'C:/Users/nejat/AIM Projects/week4 data/store.csv'
-        
-        train, test, store = load_data(train_path, test_path, store_path)
 
+        # Load and clean data
+        train, test, store = load_data(train_path, test_path, store_path)
         train = clean_data(train)
         test = clean_data(test)
 
+        # Merge data
         train, test = merge_data(train, test, store)
-        
+
+        # Feature Engineering
+        train = feature_engineering(train)
+        test = feature_engineering(test)
+
+        logger.info(f"Train data after feature engineering:\n{train.head()}")
+        logger.info(f"Test data after feature engineering:\n{test.head()}")
+
+        # Train the model
+        trained_model = train_model(train)
         logger.info("Pipeline executed successfully.")
-        
+
     except Exception as e:
         logger.error(f"Error in pipeline execution: {e}")
 
